@@ -80,7 +80,7 @@ export const cashOut =async (req:Request,res:Response)=>{
 }
 
 export const getTransactions=async (req:Request,res:Response)=>{
-    const {id,selectedBy,day} = req.body
+    const {id,selectedBy,day,month,year} = req.body
     var transaction = null
     switch (selectedBy) {
         case "c":
@@ -145,7 +145,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
                 })
                 transaction = listByDate.filter(obj=>{
                     if (day) {
-                      if (obj.date.day === day) {
+                      if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                           return obj
                       }
                     } else {
@@ -212,7 +212,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
             })
             transaction = listByDate.filter(obj=>{
                 if (day) {
-                  if (obj.date.day === day) {
+                  if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                       return obj
                   }
                 } else {
@@ -271,8 +271,8 @@ export const getTransactions=async (req:Request,res:Response)=>{
                 }
             })
             transaction = listByDate.filter(obj=>{
-              if (day) {
-                if (obj.date.day === day) {
+              if (day && month && year) {
+                if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                     return obj
                 }
               } else {
@@ -286,18 +286,5 @@ export const getTransactions=async (req:Request,res:Response)=>{
     
     var dates = transaction
 
-    // switch (byDate) {
-    //     case true:
-    //         dates = transaction.filter(elem=>{
-    //             if (elem.createdAt.getDate() === date) {
-    //                 return elem
-    //             }
-    //         })
-    //         break;
-    
-    //     default:
-    //         dates = transaction
-    //         break;
-    // }
     res.json(dates)
 }
