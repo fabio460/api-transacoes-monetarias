@@ -292,7 +292,12 @@ export const getTransactions=async (req:Request,res:Response)=>{
 }
 
 export const trans =async (req:Request,res:Response)=>{
-    const a = await prisma.transactions.findMany()
+    const {username} = req.body
+    const a = await prisma.transactions.findMany({
+        select:{
+          creditedAccount:true
+        }
+    })
 
-    res.json(a)
+    res.send(a)
 }

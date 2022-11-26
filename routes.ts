@@ -10,6 +10,6 @@ router.post('/getUser',accessVerify,getUser)
 router.post('/login',login)
 router.post('/getAccount',accessVerify,getAccount)
 router.post('/cashOut',accessVerify,cashOut)
-router.post('/getTransactions',accessVerify,getTransactions)
-router.post('/getTrans',accessVerify,trans)
+router.post('/getTransactions',getTransactions)
+router.post('/get',trans)
 export default router
