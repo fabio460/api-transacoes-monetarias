@@ -203,14 +203,14 @@ export const getTransactions=async (req:Request,res:Response)=>{
                     }
                 }
             })
-             listByDate =await aux.map(e=>{
+             listByDate = aux.map(e=>{
                 let date =new Date(e.createdAt)
                 return {
                     obj:e,
                     date: handleDate(date)
                 }
             })
-            transaction =await listByDate.filter(obj=>{
+            transaction = listByDate.filter(obj=>{
                 if (day) {
                   if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                       return obj
@@ -234,33 +234,33 @@ export const getTransactions=async (req:Request,res:Response)=>{
                    ],
                 
                 },
-                // select:{
-                //     id:true,
-                //     createdAt:true,
-                //     value:true,
-                //     debitedAccount:{
-                //         select:{
-                //             id:true,
-                //             balance:false,
-                //             user:{
-                //                 select:{
-                //                     username:true
-                //                 }
-                //             }
-                //         }
-                //     },
-                //     creditedAccount:{
-                //         select:{
-                //             id:true,
-                //             balance:false,
-                //             user:{
-                //                 select:{
-                //                     username:true
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
+                select:{
+                    id:true,
+                    createdAt:true,
+                    value:true,
+                    debitedAccount:{
+                        select:{
+                            id:true,
+                            balance:false,
+                            user:{
+                                select:{
+                                    username:true
+                                }
+                            }
+                        }
+                    },
+                    creditedAccount:{
+                        select:{
+                            id:true,
+                            balance:false,
+                            user:{
+                                select:{
+                                    username:true
+                                }
+                            }
+                        }
+                    }
+                }
             })
              
                 listByDate = aux.map(e=>{
@@ -270,7 +270,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
                     date: handleDate(date)
                 }
             })
-            transaction =await listByDate.filter(obj=>{
+            transaction = listByDate.filter(obj=>{
               if (day && month && year) {
                 if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                     return obj
@@ -284,9 +284,15 @@ export const getTransactions=async (req:Request,res:Response)=>{
             
     }
     
-    var dates =await transaction
+    var dates = transaction
 
     setTimeout(() => {
         res.json(dates)
     }, 300);
+}
+
+export const trans =async (req:Request,res:Response)=>{
+    const a = await prisma.transactions.findMany()
+
+    res.json(a)
 }
