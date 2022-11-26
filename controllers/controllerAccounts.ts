@@ -290,5 +290,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
     
     var dates =await transaction
 
-    res.json(dates)
+    setTimeout(() => {
+        res.json(dates)
+    }, 300);
 }
