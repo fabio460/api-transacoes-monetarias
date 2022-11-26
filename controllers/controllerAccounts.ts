@@ -238,33 +238,33 @@ export const getTransactions=async (req:Request,res:Response)=>{
                    ],
                 
                 },
-                select:{
-                    id:true,
-                    createdAt:true,
-                    value:true,
-                    debitedAccount:{
-                        select:{
-                            id:true,
-                            balance:false,
-                            user:{
-                                select:{
-                                    username:true
-                                }
-                            }
-                        }
-                    },
-                    creditedAccount:{
-                        select:{
-                            id:true,
-                            balance:false,
-                            user:{
-                                select:{
-                                    username:true
-                                }
-                            }
-                        }
-                    }
-                }
+                // select:{
+                //     id:true,
+                //     createdAt:true,
+                //     value:true,
+                //     debitedAccount:{
+                //         select:{
+                //             id:true,
+                //             balance:false,
+                //             user:{
+                //                 select:{
+                //                     username:true
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     creditedAccount:{
+                //         select:{
+                //             id:true,
+                //             balance:false,
+                //             user:{
+                //                 select:{
+                //                     username:true
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
             })
              
                 listByDate = aux.map(e=>{
