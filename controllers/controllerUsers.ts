@@ -40,25 +40,34 @@ export const setUsers =async (req:Request,res:Response)=>{
             }
         }
       }
-     return main()
+      try {
+        return main()
+      } catch (error) {
+        res.json(error)
+      }
 }
 
 export const getUsers =async (req:Request,res:Response)=>{  
+   try {
     const user =await prisma.accounts.findMany({
-       select:{
-        
-        user:{
-            select:{
-                id:true,
-                username:true
-            }
+        select:{
+         
+         user:{
+             select:{
+                 id:true,
+                 username:true
+             }
+         }
         }
-       }
-    })
-    return res.json(user)
+     })
+     return res.json(user)
+   } catch (error) {
+     res.json(error)
+   }
 }
 
 export const getUser =async (req:Request,res:Response)=>{
+   try {
     const {id} = req.body  
     const user =await prisma.users.findUnique({
         where:{
@@ -70,24 +79,31 @@ export const getUser =async (req:Request,res:Response)=>{
         }
     })
     return res.json(user)
+   } catch (error) {
+    res.json(error)
+   }
 }
 
 export const login = async (req:Request,res:Response)=>{
-   const {username,password} = req.body
-   const user = await prisma.users.findUnique({
-    where:{
-        username,
+  try {
+    const {username,password} = req.body
+    const user = await prisma.users.findUnique({
+     where:{
+         username,
+     }
+    })
+    if (bcrypt.compareSync(password,user?.password??'')) {
+     const auth =  Jwt.sign({id:user?.id},process.env.SECRETKEY??'',{expiresIn:'24h'})
+     res.json({
+         usuario:user?.id,
+         JWT:auth
+        })    
+    } else {
+     res.json(null)
     }
-   })
-   if (bcrypt.compareSync(password,user?.password??'')) {
-    const auth =  Jwt.sign({id:user?.id},process.env.SECRETKEY??'',{expiresIn:'24h'})
-    res.json({
-        usuario:user?.id,
-        JWT:auth
-       })    
-   } else {
-    res.json(null)
-   }
+  } catch (error) {
+    res.json(error)
+  }
 }
 
 export const accessVerify =async (req:Request,res:Response,next:any)=>{

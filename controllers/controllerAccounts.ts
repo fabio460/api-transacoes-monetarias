@@ -285,12 +285,8 @@ export const getTransactions=async (req:Request,res:Response)=>{
               }
             })
             break;    
-
-            
     }
-    
     var dates = transaction
-
     res.json(dates)
   } catch (error) {
     res.json(error)
