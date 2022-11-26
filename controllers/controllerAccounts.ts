@@ -4,7 +4,6 @@ import { Request, Response } from "express"
 import { handleDate } from "../uteis"
 
 export const getAccount =async (req:Request,res:Response)=>{
-   try {
     const account = await prisma.accounts.findUnique({
         where:{
             id:req.body.id 
@@ -16,9 +15,6 @@ export const getAccount =async (req:Request,res:Response)=>{
         }
     })
     res.json(account)
-   } catch (error) {
-    res.json(error)
-   }
 }
 
 export const cashOut =async (req:Request,res:Response)=>{
