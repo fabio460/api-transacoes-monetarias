@@ -85,8 +85,9 @@ export const getUser =async (req:Request,res:Response)=>{
 }
 
 export const login = async (req:Request,res:Response)=>{
-  try {
     const {username,password} = req.body
+  try {
+   
     const user = await prisma.users.findUnique({
      where:{
          username,
