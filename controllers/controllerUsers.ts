@@ -81,9 +81,7 @@ export const getUser =async (req:Request,res:Response)=>{
 }
 
 export const login = async (req:Request,res:Response)=>{
-    const {username,password} = req.body
-  try {
-   
+    const {username,password} = req.body  
     const user = await prisma.users.findUnique({
      where:{
          username,
@@ -98,9 +96,6 @@ export const login = async (req:Request,res:Response)=>{
     } else {
      res.json(null)
     }
-  } catch (error) {
-    res.json(error)
-  }
 }
 
 export const accessVerify =async (req:Request,res:Response,next:any)=>{
