@@ -40,11 +40,7 @@ export const setUsers =async (req:Request,res:Response)=>{
             }
         }
       }
-      try {
         return main()
-      } catch (error) {
-        res.json(error)
-      }
 }
 
 export const getUsers =async (req:Request,res:Response)=>{  
