@@ -207,14 +207,14 @@ export const getTransactions=async (req:Request,res:Response)=>{
                     }
                 }
             })
-             listByDate = aux.map(e=>{
+             listByDate =await aux.map(e=>{
                 let date =new Date(e.createdAt)
                 return {
                     obj:e,
                     date: handleDate(date)
                 }
             })
-            transaction = listByDate.filter(obj=>{
+            transaction =await listByDate.filter(obj=>{
                 if (day) {
                   if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                       return obj
@@ -274,7 +274,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
                     date: handleDate(date)
                 }
             })
-            transaction = listByDate.filter(obj=>{
+            transaction =await listByDate.filter(obj=>{
               if (day && month && year) {
                 if (obj.date.day === day && obj.date.month === month && obj.date.year === year) {
                     return obj
@@ -288,7 +288,7 @@ export const getTransactions=async (req:Request,res:Response)=>{
             
     }
     
-    var dates = transaction
+    var dates =await transaction
 
     res.json(dates)
 }
