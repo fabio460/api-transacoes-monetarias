@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { cashOut, getAccount, getTransactions,trans } from './controllers/controllerAccounts'
+import { cashOut, getAccount, getTransactions } from './controllers/controllerAccounts'
 import { accessVerify, getUser, getUsers, login, setUsers} from './controllers/controllerUsers'
 
 const router = Router()
@@ -11,5 +11,5 @@ router.post('/login',login)
 router.post('/getAccount',accessVerify,getAccount)
 router.post('/cashOut',accessVerify,cashOut)
 router.post('/getTransactions',getTransactions)
-router.post('/get',trans)
+
 export default router
