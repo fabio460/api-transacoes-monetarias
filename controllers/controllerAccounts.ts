@@ -69,7 +69,7 @@ export const cashOut =async (req:Request,res:Response)=>{
                             value
                         }
                     })
-                    res.json("enviado o valor de "+value.toFixed(2)+" reais para "+ userIn?.username+" seu novo saldo é: "+newBalanceOut.toFixed(2)+" reais.")            
+                    res.json("enviado o valor de R$ "+value.toFixed(2)+" para "+ userIn?.username+" seu novo saldo é: R$"+newBalanceOut.toFixed(2)+".")            
                 }
             } else {
                 res.json('saldo insuficiente')
